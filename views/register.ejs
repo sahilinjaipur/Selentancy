@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+          <i class="fas fa-user-plus"></i> Register
+        </h1>
+        <% include ./partials/messages %>
+        <form action="/users/register" method="POST">
+          <div class="form-group">
+            <input
+              type="name"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Enter Name"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="Enter  Business Email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="name"
+              id="organisation"
+              name="organisation"
+              class="form-control"
+              placeholder="Organisation"
+              value="<%= typeof organisation != 'undefined' ? organisation : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="name"
+              id="jobtitle"
+              name="jobtitle"
+              class="form-control"
+              placeholder="Job title"
+              value="<%= typeof jobtitle != 'undefined' ? jobtitle : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="Create Password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+          </div>
+          <div class="form-group">
+
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              class="form-control"
+              placeholder="Confirm Password"
+              value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+            />
+          </div>
+          <div class="form-group">
+            
+            <input type="checkbox" 
+            name="checkbox" 
+            id="checkbox"
+            class="flow-control"
+            value="<%= typeof checkbox != 'undefined' ? checkbox : '' %>"
+            />
+            <label for="checkbox">I agree to the Terms</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Register
+          </button>
+        </form>
+        <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
+      </div>
+    </div>
+  </div>
+  
+</div>
