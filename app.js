@@ -5,6 +5,8 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
+const $ = require( "jquery" )
+
 const app = express();
 
 // Passport Config

@@ -1,3 +1,220 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<nav class="navbar navbar-expand-sm  navbar-dark px-sm-5">
+    <a  class="navbar-brand">Selentancy</a>
+    
+    <div class="ml-auto">
+        <button>
+            <span class="mr-2">
+                <a href="/users/logout">Logout</a>
+                </span>
+        </button>
+        
+    </div>
+    
+</nav>
+<div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <span data-feather="home"></span>
+                Dashboard <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file"></span>
+                <i class="fa fa-location-arrow" aria-hidden="true"> Location</i>
+                
+                <input class="form-control" id="search-location" type="text" placeholder="Search via Location">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="shopping-cart"></span>
+            <i class="fas fa-city">City</i>
+            <input class="form-control" id="search-city" type="text" placeholder="Search via City" aria-label="Search">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="users"></span>
+                <i class="fa fa-industry" aria-hidden="true">Industry</i>
+                <input class="form-control" id="search-industry" type="text" placeholder="Search via Industry" >
+
+              </a>
+           
+          </ul>
+        </div>
+      </nav>
+  
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <span data-feather="calendar"></span>
+              This week
+            </button>
+          </div>
+        </div>
+  
+        
+  
+        <h2>Data</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                
+                <th>Industry</th>
+                <th>Location</th>
+                <th>City</th>
+              </tr>
+            </thead>
+            <tbody id="myTable">
+            </tbody>
+          </table>
+             
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>
+      
+      var myArray = [
+    {'Industry':'Intern', 'Location':'Assam', 'City':'Jorhat'},
+    {'Industry':'Intern', 'Location':'Rajasthan', 'City':'Jaipur'},
+    {'Industry':'Millo', 'Location':'Haryana', 'City':'Ambala'},
+    {'Industry':'Trio', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Tim', 'Location':'Goa', 'City':'Bogmalo'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'},
+    {'Industry':'Eriko', 'Location':'Goa', 'City':'Bardez'}
+]
+
+
+function buildTable(data){
+    var table = document.getElementById('myTable')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+        var colindustry = `Industry-${i}`
+        var collocation = `Location-${i}`
+        var colCity = `City-${i}`
+
+        var row = `<tr>
+                        <td>${data[i].Industry}</td>
+                        <td>${data[i].Location}</td>
+                        <td>${data[i].City}</td>
+                   </tr>`
+        table.innerHTML += row
+    }
+}
+buildTable(myArray);
+
+
+$("#search-location").on("keyup"  , function(){
+    var valuel =$(this).val()
+    
+    var data = searchTable(valuel,myArray)
+    buildTable(data)
+});
+
+function searchTable(valuel , data) {
+    var filteredData =[]
+    for (var i = 0; i < data.length; i++) {
+        valuel = valuel.toLowerCase()
+        var Location = data[i].Location.toLowerCase()
+        if(Location.includes(valuel)){
+            filteredData.push(data[i])
+        }
+        
+    }
+    return filteredData
+  }
+  $("#search-city").on("keyup"  , function(){
+    var valuec =$(this).val()
+    
+    var datac = searchTablec(valuec,myArray)
+    buildTable(datac)
+});
+function searchTablec(valuec , datac) {
+    var filteredDatac =[]
+    for (var i = 0; i < datac.length; i++) {
+        valuec = valuec.toLowerCase()
+        var City = datac[i].City.toLowerCase()
+        if(City.includes(valuec)){
+            filteredDatac.push(datac[i])
+        }
+        
+    }
+    return filteredDatac
+  }
+
+  $("#search-industry").on("keyup"  , function(){
+    var valuei =$(this).val()
+    
+    var datai = searchTablei(valuei,myArray)
+    buildTable(datai)
+});
+function searchTablei(valuei , datai) {
+    var filteredDatai =[]
+    for (var i = 0; i < datai.length; i++) {
+        valuei = valuei.toLowerCase()
+        var Industry = datai[i].Industry.toLowerCase()
+        if(Industry.includes(valuei)){
+            filteredDatai.push(datai[i])
+        }
+        
+    }
+    return filteredDatai
+  }
+
+
+
+  </script>
+
+<style>
+    nav{
+        background : #2a2a72;
+    }
+    a{
+        text-decoration: none !important;
+    }
+    
+
+button{
+text-transform:capitalize !important;
+font-size:1.2rem !important;
+background:transparent !important;
+font-family: 'Roboto', sans-serif !important;
+border:0.05rem solid #009ffd;
+color: #009ffd;
+padding:0.2rem 0.5rem;
+cursor: pointer;
+margin:0.2rem 0.5rem 0.2rem 0;
+border-radius:0.5rem;
+transition:all 0.5s ease-in-out;
+}
+button:hover{
+    background:lightblue !important;
+    color:#2a2a72;
+}
+button:focus{
+    outline:none;
+}
+
+</style>
