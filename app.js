@@ -5,8 +5,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-const $ = require( "jquery" )
-
 const app = express();
 
 // Passport Config
@@ -27,6 +25,8 @@ mongoose
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+
+app.use( express.static( "public" ) );
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
